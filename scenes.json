@@ -1,0 +1,131 @@
+{
+  "initialVariables": {
+    "buildingType": "school",
+    "flowerColor": "yellow",
+    "peacefulState": "relaxed",
+    "shapeOf": "cat",
+    "wordChange": "sometimes",
+    "isChosen": "text1",
+    "pckrgreenType": "park"
+  },
+
+  "scenarios": {
+    "quietbacks": {
+      "story": {
+        "s1": { "text1": "You are behind some kind of a building.", "options": "automatic", "value": null },
+        "s2": { "text1": "What is it?", "options": "input", "value": "buildingType" },
+        "s3": { "text1": "Is it peaceful there?", "options": ["yes", "no"], "value": "peacefulState", "yes": "quiet", "no": "loud" },
+        "s4": { "text1": "Look around.", "options": "automatic", "value": null },
+        "s5": { "text1": "Are you looking?", "options": ["yes", "no"], "value": "isChosen", "yes": "text1", "no": "text2" },
+        "s6": { "text1": "That's good. Take it all in.", "text2": "You are blind.", "options": "automatic", "value": null }
+        
+      }
+    },
+    "accessiblegreen": {
+      "story": {
+        "s1": { "text1": "You find yourself in a ${pckrgreenType}", "conditiontext": "It’s ${peacefulState}. The ${pckrgreenType} is half hidden behind ${buildingType}.", "options": "wordchange", "value": ["peacefulState", "greenType", "buildingType"], "pickeroptions": null, "pckroptions": ["park", "garden", "forest"], "condition": "quietbacks" },
+        "s2": { "text1": "Public ${pckrgreenType} are a gift to the city.", "options": "automatic", "value": null, "condition": null }
+      }
+    },
+    "stillwater": {
+      "story": { 
+        "s1": { "text1": "This is still water.", "options": "automatic", "value": null },
+        "s2": { "text1": "It’s ${peacefulState}. The ${pckrgreenType} is half hidden behind ${buildingType}.", "options": "wordchange", "value": ["peacefulState", "greenType", "buildingType"], "pickeroptions": null, "pckroptions": ["park", "garden", "forest"] },
+        "s3": { "text1": "And I hope this works.", "options": "automatic", "value": null }
+      }
+    },
+    "connectedplay": {
+      "story": {
+        "s1": { "text1": "Little steps first.", "options": "automatic", "value": null },
+        "s2": { "text1": "Yes and?", "options": "automatic", "value": null }
+      }
+    }
+  },
+
+  "afterscenarios": {
+    "quietbacks": {
+      "story": {
+        "s1": { "text1": "This is just a test.", "options": "button", "buttonoptions": ["yes"], "value": null },
+        "s2": { "text1": "You are behind a ${buildingType} in the ${peacefulState}.", "options": "parameters", "value": null }
+      }
+    },
+    "accessiblegreen": {
+      "story": {
+        "s1": { "text1": "You see a green field.", "options": "button", "buttonoptions": ["yes"], "value": null },
+        "s2": { "text1": "This is so amazing..", "options": "button", "buttonoptions": ["yes"], "value": null }
+      }
+    },
+    "stillwater": {
+      "story": {
+        "s1": { "text1": "This is still water.", "options": "button", "buttonoptions": ["yes"], "value": null },
+        "s2": { "text1": "And I hope this works.", "options": "button", "buttonoptions": ["yes"], "value": null },
+        "s3": { "text1": "This is shit.", "options": "button", "buttonoptions": ["yes"], "value": null }
+      }
+    },
+    "connectedplay": {
+      "story": {
+        "s1": { "text1": "Little steps first.", "options": "button", "buttonoptions": ["yes"], "value": null },
+        "s2": { "text1": "There is something I need to try.", "options": "button", "buttonoptions": ["yes"], "value": null },
+        "s3": { "text1": "Step 3.", "options": "button", "buttonoptions": ["yes"], "value": null },
+        "s4": { "text1": "Step 4", "options": "button", "buttonoptions": ["yes"], "value": null }
+      }
+    }
+  },
+
+  "finalscenarios": {
+    "quietbacks": {
+      "story": {
+        "s1": { "text": "Loud music spills from the open windows of the ${buildingType}.", "scenario": "quietbacks", "step": "2", "distance": { "min": 0.000, "max": 0.660 }, "intimacy": { "min": 0.661, "max": 1.320 }},
+        "s2": { "text": "The eerie quietness surrounds the ${buildingType}.", "scenario": "quietbacks","step": "2", "distance": { "min": 1.321, "max": 2.000 }, "intimacy": { "min": 0.661, "max": 1.320 }},
+        "s3": { "text": "The chatter of the people can be heard from out of the ${buildingType}.", "scenario": "quietbacks","step": "2", "distance": { "min": 0.661, "max": 1.320 }, "intimacy": { "min": 0.661, "max": 1.320 }},
+        "s4": { "text": "Loud music splls from the open windows of the ${buildingType}, yet the sound seems distant.", "scenario": "quietbacks","step": "2", "distance": { "min": 0.000, "max": 0.660 }, "intimacy": { "min": 0.000, "max": 0.660 }},
+        "s5": { "text": "Loud music spills fromt he open windows of the ${buildingType} and makes the bodies of the passer-bys move to its rythm.", "scenario": "quietbacks","step": "2", "distance": { "min": 0.000, "max": 0.660 }, "intimacy": { "min": 1.321, "max": 2.000 }},
+        "s6": { "text": "The eerie quietness surrounds the ${buildingType}, and the only sounds are the sound of the blood rushing in the ear.", "scenario": "quietbacks","step": "2", "distance": { "min": 1.321, "max": 2.000 }, "intimacy": { "min": 0.000, "max": 0.660 }},
+        "s7": { "text": "The eerie quietness surrounds the ${buildingType}, and yet each step is heard like a loud bang.", "scenario": "quietbacks","step": "2", "distance": { "min": 1.321, "max": 2.000 }, "intimacy": { "min": 1.321, "max": 2.000 }},
+        "s8": { "text": "The chatter of the people can be heard from out of the ${buildingType}, but its barely audible.", "scenario": "quietbacks","step": "2", "distance": { "min": 0.661, "max": 1.320 }, "intimacy": { "min": 0.000, "max": 0.660 }},
+        "s9": { "text": "The chatter of the people can be heard from out of the ${buildingType}, people can hear every word and they sit to listen.", "scenario": "quietbacks","step": "2", "distance": { "min": 0.661, "max": 1.320 }, "intimacy": { "min": 1.321, "max": 2.000 }}
+      }
+    },
+    "accessiblegreen": {
+      "story": {
+        "s1": { "text": "I don't know what's happening here.", "value": "buildingType", "condition": "dungeon" },
+        "s2": { "text": "There are more than here.", "value": "buildingType", "condition": "music hall" }
+      }
+    },
+    "stillwater": {
+      "story": {
+        "s1": { "text": "This is shit.", "value": "buildingType", "condition": "music hall" },
+        "s2": { "text": "Maybe this is all it is.", "value": "buildingType", "condition": "music hall" }
+      }
+    },
+    "connectedplay": {
+      "story": {
+        "s1": { "text": "God please.", "value": "buildingType", "condition": "music hall" },
+        "s2": { "text": "Yes hm no.", "value": "buildingType", "condition": "dungeon" },
+        "s3": { "text": "These things make sense.", "value": "buildingType", "condition": "dungeon" },
+        "s4": { "text": "Do they?", "value": "buildingType", "condition": "music hall" }
+      }
+    }
+  },
+
+  "enabledScenarios": {
+    "frauenplanweimar": ["quietbacks", "stillwater"],
+    "theaterplatz": ["quietbacks", "accessiblegreen"],
+    "goetheplatz": ["accessiblegreen", "stillwater"]
+  },
+
+  "parametervalues": {
+    "quietbacks": {
+      "1": { "distance": 1, "intimacy": 1, "chance": 1},
+      "2":{ "distance": 1, "intimacy": 1, "chance": 1}
+    },
+    "stillwater": {
+      "1": { "distance": 1, "intimacy": 1, "chance": 1},
+      "2":{ "distance": 1, "intimacy": 1, "chance": 1}
+    },
+    "connectedplay": {
+      "1": { "distance": 1, "intimacy": 1, "chance": 1},
+      "2":{ "distance": 1, "intimacy": 1, "chance": 1}
+    }
+  }
+}

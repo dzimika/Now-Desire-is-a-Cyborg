@@ -1,0 +1,184 @@
+
+{
+    "scenarios": {
+        "quietbacks": {
+            "story": {
+                "s1": { "text1": "You are behind some kind of a building.", "options": "automatic", "value": null, "condition": null },
+                "s2": { "text1": "What is it?", "options": "input", "value": "buildingType", "condition": null },
+                "s3": { "text1": "Is it peaceful there?", "options": ["yes", "no"], "value": "peacefulState", "yes": "quiet", "no": "loud", "condition": null },
+                "s5": { "text1": "Look around.", "options": "automatic", "value": null, "condition": null },
+                "s6": { "text1": "Are you looking?", "options": ["yes", "no"], "value": "isChosen", "yes": "text1", "no": "text2", "condition": null },
+                "s7": { "text1": "That's good. Take it all in.", "text2": "You are blind.", "options": "automatic", "value": null, "condition": null }
+            }
+        },
+        "accessiblegreen": {
+            "story": {
+                "s1": { "text1": "You find yourself in a ${pckrgreenType}", "conditiontext": "It’s ${peacefulState}. The ${pckrgreenType} is half hidden behind ${buildingType}.", "options": "wordchange", "value": ["peacefulState", "greenType", "buildingType"], "pickeroptions": null, "pckroptions": ["park", "garden", "forest"], "condition": "quietbacks" },
+                "s2": { "forest": "It's a perfect palace to get lost in.", "park": "You should look for the footsteps of the people who already passed this way.", "garden": "Planting flowers can calm your soul.", "options": "automatic", "value": null, "condition": null, "valuecondition": "greenType" },
+                "s3": { "forest": "If you were to hide an object inside this forest what would it be?", "park": "Imagine a person dropped something in front of you. What would it be?", "garden": "What object could you bury inside this ground?.", "options": "input", "value": "greenObject", "condition": null, "valuecondition": "greenType" }
+            }
+        },
+        "degreesofpublicness": {
+            "story": {
+                "s1": { "text1": "Don't you think public spaces are a good additons to the city?", "conditiontext": "Public ${greenType} hide other people's memories. Isn't it amazing?", "options": ["yes", "no"], "value": "isChosen", "yes": "text1", "no": "text2", "condition": "accessiblegreen" },
+                "s2": { "text1": "Right? That's where the community is.", "text2": "Interesting take.", "options": "automatic", "value": null, "condition": null},
+                "s3": { "text1": "How public is it though?", "options": ["public", "hidden", "paid entrance"], "value": "levelPublic", "condition": null },
+                "s4": { "text1": "I think people should be able to access most of the city they live in.", "options": "automatic", "value": null }
+            }
+        },
+        "secretplace": {
+            "story": {
+                "s1": { "text1": "A secret level unlocked.", "options": "automaticstyle", "value": null },
+                "s2": { "text1": "Do you ever wonder if everyone sees the world the same?", "options": ["yes", "no"], "value": "isChosenFinal", "yes": "s", "no": "n", "condition": null },
+                "s3": { "text1": "Sit somewhere.", "options": "automatic", "value": null, "condition": null },
+                "n3": { "text1": "So what do you think, how do we see the world?", "options": ["the same", "of course different", "it doesn't matter"], "value": "seeingWorld", "condition": null},
+                "s4": { "text1": "What do you think a value of a secret is?", "options": ["1000 coins", "long lasting relationship", "peace", "something only for yourself", "no responasibilities", "no restraints"], "value": "secretValue", "condition": null},
+                "n4": { "text1": "I don't know if I agree.", "options": "automatic", "value": null, "condition": null},
+                "s5": { "text1": "I don't know if I agree.", "options": "automatic", "value": null, "condition": null}
+            }
+        },
+        "halfhiddengarden": {
+            "name": "half hidden ${itsGreen}",
+            "story": {
+                "s1": { "text1": "Wait.", "options": "automatic", "value": null, "condition": null },
+                "s2": { "text1": "I smell flowers. Are there flowers?", "options": ["yes", "no"], "value": "flowerState", "yes": "full of flowers", "no": "flowerless", "condition": null },
+                "s3": { "text1": "Flowers and humans love sun, but sometimes it can be too much.", "options": "automatic", "value": null, "condition": null },
+                "s4": { "text1": "What kind of shade is there?", "options": "input", "value": "shadeValue", "condition": null },
+                "s5": { "text1": "The ${publicLevel} gardens are ${pckrgardenValue}.", "options": "wordchange", "value": ["publicLevel", "pckrgardenValue"], "pickeroptions": null, "pckroptions": ["valuable", "unecessary", "scam"], "condition": null},
+                "s6": { "text1": "It's time to discover more", "options": "automatic", "value": null, "condition": null}
+            }
+        },
+        "entrancetransitions": {
+            "name": "entrance transitions",
+            "story": {
+                "s1": { "text1": "I heard this place is not directly on the street.", "options": "automatic", "value": null, "condition": null },
+                "s2": { "text1": "Where is the ${isEntrance}?", "options": "wordgame", "value": "entranceValue", "condition": null },
+                "s3": { "text1": "And what about the ${isExit}?", "options": "wordgame", "value": "exitValue", "condition": null }
+            }
+        },
+        "somethinginthemiddle": { 
+            "name": "${somethingMiddle} in the middle",
+            "story": {
+                "s1": { "text1": "But wait.", "options": "automatic", "value": null },
+                "s2": { "text1": "There's something in the middle.", "conditiontext": "There's something in the middle of the ${greenType}", "options": "automatic", "value": null, "condition":"accessiblegreen"},
+                "s3": { "text1": "The calm surface of the water glimmers through the branches. The light is refracting and creating patterns. In the middle there is a still body of water.", "options": "stop", "value": "isMiddle", "middlevalue": "stillwater", "condition": null},
+                "s4": { "text1": "The noise of the fountain vails the noise of the people. It stands there and is a natural meeting place.", "options": "stop", "value": "isMiddle", "middlevalue": "fountain", "condition": null},
+                "s5": { "text1": "The kids are running in the middle. They swinging on the swings and sliding on the slides. The parents and nannies are sitting around.", "options": "stop", "value": "isMiddle", "middlevalue": "playground", "condition": null},
+                "s6": { "text1": "I guess there's nothing in the middle.", "options": "automatic", "value": null, "condition": null}
+            }
+        },
+        "stillwater": { 
+            "story": {
+                "s1": { "text1": "Walk to the ${isStillwater}.", "options": "wordchange", "value": ["isStillwater"], "pickeroptions": null, "pckroptions": ["pond", "lake", "fountian"], "condition": null },
+                "s2": { "text1": "Did you walk to it?", "options": ["yes", "no"], "value": "isChosen", "yes": "text1", "no": "text2", "condition": null },
+                "s3": { "text1": "You are a little bit too obidient.", "text2": "You never seem to listen. Keep it up..", "options": "automatic", "value": null, "condition": null },
+                "s4": { "text1": "In the water you see ${inWater}.", "options": "wordchange", "value": ["inWater"], "pickeroptions": null, "pckroptions": ["a reflection", "ducks", "fish"], "condition": null }
+            }
+        },
+        "animals": { 
+            "story": {
+                "s1": { "text1": "You say you saw ${inWater}.", "options": "automatic", "value": null, "condition": null },
+                "s2": { "text1": "Are they peaceful?", "options": ["yes", "no"], "value": "animalState", "yes": "quiet", "no": "loud", "condition": null },
+                "s3": { "text1": "Even when it doesn't seem like it, they notice you.", "options": "automatic", "value": null, "condition": null }
+            }
+        },
+        "tapestryofdarkandlight": { 
+            "story": {
+                "s1": { "text1": "The reflection shows the inverted image of the world.", "options": "automatic", "value": null, "condition": null },
+                "s2": { "text1": "Does that world seem familiar to you?",  "options": ["yes", "no"], "value": "isChosenFinal", "yes": "s", "no": "n", "condition": null },
+                "n3": { "text1": "That's because you never look at it directly.", "options": "valuebutton", "value": "isReflection.", "condition": null},
+                "s3": { "text1": "You must be a creative person.", "options": "valuebutton", "value": "isReflection.", "condition": null},
+                "n4": { "text1": "But is there even a way to look at it directly?", "options": "automatic", "value": null, "condition": null },
+                "s4": { "text1": "It would be so great if we could paint on top of the world.", "options": "automatic", "value": null, "condition": null},
+                "s5": { "text1": "I think we go carried away a little but", "options": "automatic", "value": null, "condition": null},
+                "n5": { "text1": "I think we go carried away a little but", "options": "automatic", "value": null, "condition": null}
+            }
+        },
+        "pathshape": {
+            "story": {
+                "s1": { "text1": "Now stop and look at the paths. Are they circular?", "conditiontext": "Considering that the ${isMiddle} is in the middle, I guess ${greenType} have circular paths.","options": ["yes", "no"], "value": "pathShape", "yes": "circular", "no": "separate", "condition": "somethinginthemiddle" },
+                "s2": { "text1": "Can you start at one end, walk and end up at the same end?", "options": ["yes", "no"], "value": "pathShape", "yes": "circular", "no": "separate", "condition": null},
+                "s3": { "text1": "Got it.", "options": "automatic", "value": null, "condition": null},
+                "s4": { "text1": "I you would use one adjective to describe the paths, what would it be?", "options": "input", "value": "pathAdjective", "condition": null},
+                "s5": { "text1": "Isn't it nice noticing the way we move around our cities?", "options": "automatic", "value": null, "condition": null},
+                "s6": { "text1": "That was not really a question.", "options": "automatic", "value": null, "condition": null}
+            }
+        },
+        "sittingplaces": { 
+            "name": "sequance of sitting places",
+            "story": {
+                "s1": { "text1": "Now, if I would want to sit somewhere.", "options": "automatic", "value": null, "condition": null },
+                "s2": { "text1": "Where would I be able to sit?", "options": "addvalue", "value": "sittingPlace", "pickeroptions:": ["grass", "benches", "chairs", "a wall", "sidewalk", "a stone"] },
+                "s3": { "text1": "You can only sit on ${sittingPlace}?", "options": "addvalue", "value": "sittingPlace", "pickeroptions:": ["grass", "benches", "chairs", "a wall", "sidewalk", "a stone"] },
+                "s4": { "text1": "Is that all?", "options": "addvalue", "value": "sittingPlace", "pickeroptions:": ["grass", "benches", "chairs", "a wall", "sidewalk", "a stone"] },
+                "s5": { "text1": "One last time. ${sittingPlace} is all?", "options": "addvalue", "value": "sittingPlace", "pickeroptions:": ["grass", "benches", "chairs", "a wall", "sidewalk", "a stone"] },
+                "s6": { "text1": "Okay I trust you.", "options": "automatic", "value": null, "condition": null}
+            }
+        },
+        "aplacetowait": { 
+            "name": "a place to wait",
+            "story": {
+                "s1": { "text1": "I wonder if the only way to wait for someone is to sit down.", "options": "automatic", "value": null, "condition": null},
+                "s2": { "text1": "Being able to wait is a virtue.", "options": "automatic", "value": null },
+                "s3": { "text1": "People are so impatient.", "options": "automatic", "value": null },
+                "s4": { "text1": "Are you wondering how this game ends?", "options": "automatic", "value": null },
+                "s5": { "text1": "Are you curious what these points are all about?", "options": ["yes", "no"], "value": "isChosen", "yes": "text1", "no": "text2", "condition": null },
+                "s6": { "text1": "You will need to be patient.", "text2": "So I guess you don't need them.", "options": "automatic", "value": null, "conditon": null },
+                "s7": { "text1": "Where do you think is a perfect place to wait for someone here?", "options": "input", "value": "placetoWait", "condition": null },
+                "s8": { "text1": "I wonder who they are waiting for.", "options": "button", "buttonvalue": ["who?"], "value": null, "condition": null },
+                "s9": { "text1": "Anyone.", "options": "automatic", "value": null, "condition": null }
+                
+            }
+        },
+        "oldpeopleeverywhere": {
+            "story": {
+                "s1": { "text1": "Let's talk more about people. It seems there a lot of older people here.", "conditiontext": "You can usually see old people waiting.", "options": "automatic", "value": null, "condition": "aplacetowait" },
+                "s2": { "text1": "I wonder what brings them here.", "options": "automatic", "value": null },
+                "s3": { "text1": "In what kind of mood are older people around you?", "options": ["cheerful", "grumpy", "sad", "melancholic", "moody", "content"], "value": "oldiesMood", "condition": null },
+                "s4": { "text1": "What do you think makes them so ${oldiesMood}?", "options": "input", "value": "moodReason", "condition": null },
+                "s5": { "text1": "People fascinate me.", "options": "button", "buttonvalue": ["what are you?"], "condition": null },
+                "s6": { "text1": "Just a helpful algorithm.", "options": "automatic", "value": null }
+                
+            }
+        },
+        "connectedplay": {
+            "story": {
+                "s1": { "text1": "Little steps first.", "options": "automatic", "value": null },
+                "s2": { "text1": "Tiny human steps.", "options": "automatic", "value": null },
+                "s3": { "text1": "The kids here play on ${pckrtypePlay}.", "options": "wordchange", "value": ["pckrtypePlay"], "pickeroptions": null, "pckroptions": ["a playground", "grass", "concrete"], "condition": null },
+                "s4": { "text1": "How do they play?", "options": ["freely", "regulated", "roughly", "calmly", "chaoticly", "happily"], "value": "kidsPlay", "condition": null},
+                "s5": { "text1": "Play is essential to life.", "options": "automatic", "value": null }
+            }
+        }
+    },
+
+    "afterscenarios": {
+        "quietbacks": {
+          "story": {
+            "s1": { "text1": "Are you ready to help build some love scenes?.", "options": "button", "buttonoptions": ["yes"], "value": null },
+            "s2": { "text1": "You are behind a ${buildingType} in the ${peacefulState}.", "options": "parameters", "value": null }
+          }
+        },
+        "accessiblegreen": {
+          "story": {
+            "s1": { "text1": "You see a green field.", "options": "button", "buttonoptions": ["yes"], "value": null },
+            "s2": { "text1": "This is so amazing..", "options": "button", "buttonoptions": ["yes"], "value": null }
+          }
+        },
+        "stillwater": {
+          "story": {
+            "s1": { "text1": "This is still water.", "options": "button", "buttonoptions": ["yes"], "value": null },
+            "s2": { "text1": "And I hope this works.", "options": "button", "buttonoptions": ["yes"], "value": null },
+            "s3": { "text1": "This is shit.", "options": "button", "buttonoptions": ["yes"], "value": null }
+          }
+        },
+        "connectedplay": {
+          "story": {
+            "s1": { "text1": "Little steps first.", "options": "button", "buttonoptions": ["yes"], "value": null },
+            "s2": { "text1": "There is something I need to try.", "options": "button", "buttonoptions": ["yes"], "value": null },
+            "s3": { "text1": "Step 3.", "options": "button", "buttonoptions": ["yes"], "value": null },
+            "s4": { "text1": "Step 4", "options": "button", "buttonoptions": ["yes"], "value": null }
+          }
+        }
+    }
+}
